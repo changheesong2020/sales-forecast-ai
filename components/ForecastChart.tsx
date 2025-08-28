@@ -10,11 +10,14 @@ interface ForecastChartProps {
 
 const ForecastChart: React.FC<ForecastChartProps> = ({ historicalData, forecastData }) => {
   const chartData = [
-    ...historicalData.map(d => ({ date: d.date, actual: d.sales })),
-    ...forecastData.map(d => ({ 
-      date: d.date, 
-      predicted: d.prediction, 
-      confidence: [d.lowerBound, d.upperBound] 
+    ...historicalData.map(d => ({
+      date: `${d.year}-${String(d.month).padStart(2, '0')}`,
+      actual: d.sales
+    })),
+    ...forecastData.map(d => ({
+      date: d.date,
+      predicted: d.prediction,
+      confidence: [d.lowerBound, d.upperBound]
     }))
   ];
 

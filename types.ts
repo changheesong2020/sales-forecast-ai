@@ -1,9 +1,10 @@
 
 export interface SalesData {
-  date: string;
-  region: string;
-  product: string;
+  year: number;
+  month: number;
   sales: number;
+  country: string;
+  product: string;
 }
 
 export interface ForecastPoint {
