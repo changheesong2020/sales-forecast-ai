@@ -5,8 +5,8 @@ import { SalesData, Algorithm, AlgorithmParameters, ForecastPoint } from '../typ
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
 
 function formatDataToCSV(data: SalesData[]): string {
-  const header = 'date,region,product,sales\n';
-  const rows = data.map(d => `${d.date},${d.region},${d.product},${d.sales}`);
+  const header = 'year,month,sales,country,product\n';
+  const rows = data.map(d => `${d.year},${d.month},${d.sales},${d.country},${d.product}`);
   return header + rows.join('\n');
 }
 
@@ -43,7 +43,8 @@ export async function generateForecast(
   googleTrendsKeywords?: string
 ): Promise<ForecastPoint[]> {
 
-  const lastDate = historicalData[historicalData.length - 1].date;
+  const lastRecord = historicalData[historicalData.length - 1];
+  const lastDate = `${lastRecord.year}-${String(lastRecord.month).padStart(2, '0')}-01`;
   const dataAsCSV = formatDataToCSV(historicalData);
   const paramsString = JSON.stringify(params, null, 2);
 
