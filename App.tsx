@@ -64,7 +64,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-bg font-sans">
+    <div className="min-h-screen bg-gray-50 font-sans">
       <Header />
       <main className="container mx-auto p-4 md:p-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -86,21 +86,21 @@ export default function App() {
             >
               {isLoading ? <Spinner /> : 'Run Forecast'}
             </button>
-            {error && <p className="text-red-400 text-center mt-2">{error}</p>}
+            {error && <p className="text-red-500 text-center mt-2">{error}</p>}
           </div>
 
           <div className="lg:col-span-8">
-            <div className="bg-dark-surface rounded-xl shadow-lg p-6">
-              <h2 className="text-2xl font-bold mb-4 text-dark-text-primary">Forecast Visualization</h2>
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <h2 className="text-2xl font-bold mb-4 text-gray-900">Forecast Visualization</h2>
               {isLoading && (
                  <div className="flex flex-col items-center justify-center h-96">
                     <Spinner />
-                    <p className="mt-4 text-dark-text-secondary">Generating your 24-month forecast...</p>
+                    <p className="mt-4 text-gray-600">Generating your 24-month forecast...</p>
                  </div>
               )}
               {!isLoading && forecastData.length === 0 && (
-                <div className="flex items-center justify-center h-96 bg-gray-800 rounded-lg">
-                  <p className="text-dark-text-secondary">Your forecast chart will appear here.</p>
+                <div className="flex items-center justify-center h-96 bg-gray-100 rounded-lg">
+                  <p className="text-gray-600">Your forecast chart will appear here.</p>
                 </div>
               )}
               {!isLoading && forecastData.length > 0 && (

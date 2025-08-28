@@ -78,28 +78,28 @@ const DataInput: React.FC<DataInputProps> = ({ onDataLoaded }) => {
   ];
 
   return (
-    <div className="bg-dark-surface rounded-xl shadow-lg p-6">
-      <h2 className="text-xl font-bold mb-4 text-dark-text-primary">1. Input Your Data</h2>
+    <div className="bg-white rounded-xl shadow-lg p-6">
+      <h2 className="text-xl font-bold mb-4 text-gray-900">1. Input Your Data</h2>
 
       {originalData.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
           <div>
-            <label className="block text-sm font-medium text-dark-text-secondary mb-1">Country</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Country</label>
             <select
               value={countryFilter}
               onChange={(e) => setCountryFilter(e.target.value)}
-              className="w-full bg-gray-700 border border-gray-600 rounded-lg p-2.5 text-dark-text-primary focus:ring-brand-primary focus:border-brand-primary"
+              className="w-full bg-white border border-gray-300 rounded-lg p-2.5 text-gray-900 focus:ring-brand-primary focus:border-brand-primary"
             >
               <option value="All">All Countries</option>
               {countries.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-dark-text-secondary mb-1">Product</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Product</label>
             <select
               value={productFilter}
               onChange={(e) => setProductFilter(e.target.value)}
-              className="w-full bg-gray-700 border border-gray-600 rounded-lg p-2.5 text-dark-text-primary focus:ring-brand-primary focus:border-brand-primary"
+              className="w-full bg-white border border-gray-300 rounded-lg p-2.5 text-gray-900 focus:ring-brand-primary focus:border-brand-primary"
             >
               <option value="All">All Products</option>
               {products.map(p => <option key={p} value={p}>{p}</option>)}
@@ -109,19 +109,19 @@ const DataInput: React.FC<DataInputProps> = ({ onDataLoaded }) => {
       )}
 
       <div>
-        <h3 className="text-lg font-semibold mb-2 text-dark-text-secondary">Upload CSV</h3>
-        <p className="text-sm text-gray-400 mb-3">Must contain columns: year, month, sales, country, product.</p>
+        <h3 className="text-lg font-semibold mb-2 text-gray-700">Upload CSV</h3>
+        <p className="text-sm text-gray-500 mb-3">Must contain columns: year, month, sales, country, product.</p>
         <input
           type="file"
           accept=".csv"
           onChange={handleFileChange}
-          className="block w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-secondary file:text-brand-primary hover:file:bg-blue-200"
+          className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-secondary file:text-brand-primary hover:file:bg-blue-200"
         />
-        {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
+        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         <p className="text-center my-4 text-gray-500">OR</p>
         <button
           onClick={() => setOriginalData(sampleData)}
-          className="w-full bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300"
+          className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
         >
           Load Sample Data
         </button>
