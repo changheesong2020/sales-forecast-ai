@@ -47,7 +47,13 @@ export default function App() {
     setForecastData([]);
 
     try {
-      const forecast = await generateForecast(historicalData, selectedAlgorithm, algorithmParams, googleTrendsKeywords);
+      const keywords = googleTrendsKeywords.trim();
+      const forecast = await generateForecast(
+        historicalData,
+        selectedAlgorithm,
+        algorithmParams,
+        keywords ? keywords : undefined
+      );
       setForecastData(forecast);
     } catch (e) {
       console.error(e);

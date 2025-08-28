@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import type { Algorithm, AlgorithmParameters } from '../types';
 
 interface ControlPanelProps {
@@ -21,6 +21,8 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
   googleTrendsKeywords,
   onGoogleTrendsKeywordsChange
 }) => {
+  const [showParams, setShowParams] = useState(false);
+
   return (
     <div className="bg-dark-surface rounded-xl shadow-lg p-6 space-y-6">
       <div>
@@ -42,40 +44,49 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
       </div>
 
       <div>
-        <h3 className="text-lg font-semibold mb-3 text-dark-text-secondary">Algorithm Parameters</h3>
-        <div className="space-y-4">
-          {selectedAlgorithm.parameters.map(param => (
-            <div key={param.id}>
-              <label htmlFor={param.id} className="block text-sm font-medium text-dark-text-primary mb-1 flex justify-between">
-                <span>{param.name}</span>
-                <span>{params[param.id]}</span>
-              </label>
-              {param.type === 'slider' && (
-                <input
-                  id={param.id}
-                  type="range"
-                  min={param.min}
-                  max={param.max}
-                  step={param.step}
-                  value={params[param.id] as number}
-                  onChange={(e) => onParamsChange(param.id, parseFloat(e.target.value))}
-                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
-                />
-              )}
-               {param.type === 'select' && (
-                <select
-                  id={param.id}
-                  value={params[param.id] as string}
-                  onChange={(e) => onParamsChange(param.id, e.target.value)}
-                  className="w-full bg-gray-700 border border-gray-600 rounded-lg p-2.5 text-dark-text-primary focus:ring-brand-primary focus:border-brand-primary"
-                >
-                  {param.options?.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                </select>
-              )}
-              <p className="text-xs text-gray-400 mt-1">{param.description}</p>
-            </div>
-          ))}
-        </div>
+        <button
+          type="button"
+          onClick={() => setShowParams(prev => !prev)}
+          className="flex justify-between items-center w-full text-lg font-semibold mb-3 text-dark-text-secondary"
+        >
+          <span>Algorithm Parameters</span>
+          <span>{showParams ? '-' : '+'}</span>
+        </button>
+        {showParams && (
+          <div className="space-y-4">
+            {selectedAlgorithm.parameters.map(param => (
+              <div key={param.id}>
+                <label htmlFor={param.id} className="block text-sm font-medium text-dark-text-primary mb-1 flex justify-between">
+                  <span>{param.name}</span>
+                  <span>{params[param.id]}</span>
+                </label>
+                {param.type === 'slider' && (
+                  <input
+                    id={param.id}
+                    type="range"
+                    min={param.min}
+                    max={param.max}
+                    step={param.step}
+                    value={params[param.id] as number}
+                    onChange={(e) => onParamsChange(param.id, parseFloat(e.target.value))}
+                    className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                  />
+                )}
+                {param.type === 'select' && (
+                  <select
+                    id={param.id}
+                    value={params[param.id] as string}
+                    onChange={(e) => onParamsChange(param.id, e.target.value)}
+                    className="w-full bg-gray-700 border border-gray-600 rounded-lg p-2.5 text-dark-text-primary focus:ring-brand-primary focus:border-brand-primary"
+                  >
+                    {param.options?.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                  </select>
+                )}
+                <p className="text-xs text-gray-400 mt-1">{param.description}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
        <div>
