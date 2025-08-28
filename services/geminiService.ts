@@ -83,12 +83,16 @@ export async function generateForecast(
   });
 
   const responseText = response.text.trim();
-  
+
   try {
     const parsedJson = JSON.parse(responseText);
     // Basic validation
     if (Array.isArray(parsedJson) && parsedJson.length > 0 && 'prediction' in parsedJson[0]) {
-      return parsedJson as ForecastPoint[];
+      const lastDateObj = new Date(lastRecord.year, lastRecord.month - 1, 1);
+      const filtered = (parsedJson as ForecastPoint[]).filter(
+        point => new Date(point.date) > lastDateObj
+      );
+      return filtered;
     }
     throw new Error('Invalid JSON structure');
   } catch (error) {
