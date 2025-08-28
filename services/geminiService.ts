@@ -48,8 +48,9 @@ export async function generateForecast(
   const dataAsCSV = formatDataToCSV(historicalData);
   const paramsString = JSON.stringify(params, null, 2);
 
-  const trendsPrompt = googleTrendsKeywords 
-    ? `Additionally, consider the potential impact of Google Trends for the following keywords as an exogenous variable: "${googleTrendsKeywords}". Increase the weight of this factor in your prediction.`
+  const trimmedKeywords = googleTrendsKeywords?.trim();
+  const trendsPrompt = trimmedKeywords
+    ? `Additionally, consider the potential impact of Google Trends for the following keywords as an exogenous variable: "${trimmedKeywords}". Increase the weight of this factor in your prediction.`
     : '';
 
   const prompt = `
