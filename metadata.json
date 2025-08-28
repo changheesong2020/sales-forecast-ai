@@ -1,0 +1,5 @@
+{
+  "name": "Sales Forecast AI",
+  "description": "An interactive web application that uses Google AI to forecast future sales based on historical data. Users can upload data, select from various forecasting algorithms, adjust parameters, and visualize the prediction results.",
+  "requestFramePermissions": []
+}
